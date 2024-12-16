@@ -20,7 +20,7 @@ Soal:
 Hitung total jam kerja setiap karyawan dalam format XX jam YY menit.
 SELECT 	NamaKaryawan,
 		DATEDIFF(MINUTE,JamMasuk, JamKeluar)/60 AS Jam, 
-		DATEDIFF(MINUTE,JamMasuk, JamKeluar)%60 AS Menit,
+		DATEDIFF(MINUTE,JamMasuk, JamKeluar)%60 AS Menit
 FROM dbo.Presensi
 
 
