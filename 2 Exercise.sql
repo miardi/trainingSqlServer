@@ -18,8 +18,11 @@
   WHERE Name LIKE 'S%'
 6. Temukan produk dengan harga di atas 1000 dan nama mengandung "Pro".
   SELECT* FROM Products
-  WHERE Harga > 1000 AND Name 
+  WHERE Harga > 1000 AND Name LIKE '%Pro%'
 
 7. Cari pelanggan yang nama depannya dimulai dengan huruf "A" menggunakan LEFT.
+  SELECT * FROM Customers
+  WHERE LEFT(Name) = 'A'
+  
 8. Cari pelanggan yang memiliki titik (.) dalam alamat email menggunakan CHARINDEX.
 9. Cari pelanggan yang nomor teleponnya berisi "1234" menggunakan PATINDEX.
