@@ -20,7 +20,16 @@ FROM penjualanBulanan
 
 
 2.Buatlah sebuah query untuk menghitung total penjualan per karyawan, termasuk hanya karyawan yang memiliki penjualan lebih besar dari rata-rata semua penjualan.
-
+WITH penjualanPerOrang AS (
+	SELECT EmployeeID, SUM(SaleAmount) AS totalPenjualan FROM EmployeeSales
+	GROUP BY EmployeeID
+),
+averagePenjualan AS (
+	SELECT AVG(totalPenjualan) AS rataRata FROM penjualanPerOrang
+)
+SELECT Name, totalPenjualan FROM penjualanPerOrang p
+JOIN SalesEmployees s ON p.EmployeeID = s.EmployeeID
+WHERE totalPenjualan > (SELECT rataRata FROM averagePenjualan)
 
 
 
@@ -33,7 +42,7 @@ FROM penjualanBulanan
 	SELECT * FROM StokPerKategori
 
 6. CTE dan Join: Gunakan CTE untuk menghitung penjualan per produk, lalu gabungkan dengan tabel produk untuk menampilkan nama produk, kategori.
-	WITH penjualanTiapProduk(
+	WITH penjualanTiapProduk AS (
 		SELECT ProdukID, SUM(JumlahTerjual) AS totalPenjualan
 		FROM Penjualan
 		GROUP BY ProdukID
