@@ -35,7 +35,10 @@ Tugas:
 
 Buat peran khusus AksesBacaSaja dan berikan izin SELECT pada semua tabel dalam database.
 
+CREATE ROLE aksesBacaSaja;
+GRANT SELECT ON SCHEMA::dbo TO aksesBacaSaja;
 
+EXEC sp_addrolemember 'aksesBacaSaja', 'User_A';
 
 
 6. Audit Izin Pengguna
@@ -43,6 +46,17 @@ Tugas:
 
 Tampilkan laporan semua pengguna dan perannya di database ini.
 
+SELECT
+    a.name as namaPengguna
+    b.name as NamaPeran
+FROM
+    sys.database_principals a
+JOIN
+    sys.database_role_members c 
+    ON a.principal_id = c.principal_id
+JOIN 
+    sys.dateabase_principals b
+    ON a.principal_id = c.role_principals_id
 
 
 7. Konfigurasi Akses Minimum (Least Privilege)
